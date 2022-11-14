@@ -35,4 +35,16 @@ public class ItemService {
 		return response.getBody();
 		
 	}
+	
+	public Item addItem(Item item) {
+		ResponseEntity<Item> response = template.postForEntity(BASE_URL, item, Item.class);
+		
+		return response.getBody();
+	}
+	
+	
+	public void deleteItem(String id) {
+		template.delete(BASE_URL + "/" + id);
+	}
+	
 }

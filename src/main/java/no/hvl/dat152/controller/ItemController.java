@@ -65,14 +65,14 @@ public class ItemController {
 
 		final Item newItem = new Item(id, name, price, description);
 		
-		ItemDAOMemorySingleton.getInstance().createItem(newItem); 
+		_itemService.addItem(newItem); 
         
         return "redirect:viewitems";
     }
 	
 	@RequestMapping(value = "/deleteitem/{id}", method = RequestMethod.GET)
 	protected String deleteItem(@PathVariable String id, Model model) {
-		Optional<Item> item = Optional.of(ItemDAOMemorySingleton.getInstance().findItem(id));
+		Optional<Item> item = Optional.of(_itemService.getItem(id));
 		
 		model.addAttribute(item.get());
 		
@@ -81,7 +81,7 @@ public class ItemController {
 	
 	@RequestMapping(value = "/deleteitemsave/{id}", method = RequestMethod.GET)
 	protected String deleteItemSave(@PathVariable String id, Model model) {
-		ItemDAOMemorySingleton.getInstance().deleteItem(id);
+		_itemService.deleteItem(id);
 		
 		return "redirect:/viewitems";
 	}
