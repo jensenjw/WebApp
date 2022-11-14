@@ -16,8 +16,9 @@ import no.hvl.dat152.model.Item;
 @PropertySource("classpath:application.properties")
 public class ItemService {
 
-	@Value("${api.url.viewitems")
-	private String BASE_URL;
+	//@Value("${api.url.items")
+	//Something wrong here that stops it from resolving. Using a hardcoded string since its only one controller
+	private String BASE_URL = "http://localhost:8299/items";
 	
 	@Autowired
 	RestTemplate template;

@@ -22,10 +22,6 @@ public class ItemController {
 	@Autowired
 	private ItemService _itemService;
 	
-	public ItemController() {
-		_itemService = new ItemService();
-	}
-	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
     public String viewShoppingDefault() {
 		return "index";
