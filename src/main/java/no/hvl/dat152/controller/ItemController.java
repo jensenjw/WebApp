@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import no.hvl.dat152.model.Item;
 import no.hvl.dat152.repositories.ItemDAOMemorySingleton;
-import service.ItemService;
+import no.hvl.dat152.service.ItemService;
 
 @Controller
 public class ItemController {
