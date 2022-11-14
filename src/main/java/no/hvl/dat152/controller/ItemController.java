@@ -41,7 +41,7 @@ public class ItemController {
 	@RequestMapping(value = "/viewitem/{id}", method = RequestMethod.GET)
     protected String viewItem(@PathVariable String id, Model model) {
 
-        final Item item = ItemDAOMemorySingleton.getInstance().findItem(id);
+        final Item item = _itemService.getItem(id);
         model.addAttribute("item", item);
 
         return "viewitem";

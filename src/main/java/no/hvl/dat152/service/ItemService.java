@@ -27,4 +27,12 @@ public class ItemService {
 		ResponseEntity<Item[]> response = template.getForEntity(BASE_URL, Item[].class);
 		return Arrays.asList(response.getBody());
 	}
+	
+	public Item getItem(String id) {
+		
+		ResponseEntity<Item> response = template.getForEntity(BASE_URL + "/" + id, Item.class);
+		
+		return response.getBody();
+		
+	}
 }
