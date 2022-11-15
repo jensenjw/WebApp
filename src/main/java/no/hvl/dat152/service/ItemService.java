@@ -42,6 +42,10 @@ public class ItemService {
 		return response.getBody();
 	}
 	
+	public void updateItem(Item item, String id) {
+		template.put(BASE_URL + "/" + id, item);
+	}
+	
 	
 	public void deleteItem(String id) {
 		template.delete(BASE_URL + "/" + id);

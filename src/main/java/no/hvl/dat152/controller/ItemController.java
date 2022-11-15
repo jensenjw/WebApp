@@ -49,7 +49,13 @@ public class ItemController {
 	
 	@RequestMapping(value = "/createitem", method = RequestMethod.GET)
     protected String createItem(Model model) {
-
+		Optional<Item> uItem = (Optional<Item>) model.getAttribute("item");
+		if(uItem != null)
+		{
+			model.addAttribute("item", uItem.get());
+			return "createitem";
+		}
+		
         final String id = ItemDAOMemorySingleton.getInstance().getNextId();
         
         Item item = new Item(id);
@@ -62,8 +68,14 @@ public class ItemController {
 	@RequestMapping(value = "/createitem", method = RequestMethod.POST)
     protected String createItem(@RequestParam String id, @RequestParam String name, 
     		                    @RequestParam Double price, @RequestParam String description) {
-
+		
 		final Item newItem = new Item(id, name, price, description);
+		if(_itemService.getItem(id) != null)
+		{
+			_itemService.updateItem(newItem, newItem.getId());
+			return "redirect:viewitems";
+		}
+		
 		
 		_itemService.addItem(newItem); 
         
@@ -88,13 +100,14 @@ public class ItemController {
 	
 	@RequestMapping(value = "/updateitem/{id}", method = RequestMethod.GET)
 	protected String updateItem(@PathVariable String id, Model model) {
-		Optional<Item> item = Optional.of(ItemDAOMemorySingleton.getInstance().findItem(id));
+		Optional<Item> item = Optional.of(_itemService.getItem(id));
 		
 		if (item.isEmpty()) {
 			return "redirect:/viewitems";
 		}
 		
-		model.addAttribute(item.get());
+		
+		model.addAttribute("item", item.get());
 		
 		return "createitem";
 	}
